@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width"  initial-scale="1.0/">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrom=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500" rel="stylesheet">
+    <link href="../../../public/css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="../../../public/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../../public/js/jquery-3.3.1.min.js"></script>
+    <script src="<%= bkashScriptUrl %>"></script>
+
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container" style="margin-left: 2%;">
+	     <img src="../../../public/images/Payment-Logo_Eng.jpg" alt="">
+            <p hidden="">
+                <a href="">Bangla</a>
+                <a href="">English</a>
+            </p>
+        </div>
+    </header>
+    <section class="bkash">
+        <div class="bkash-step" style="margin-left: -25%;">
+            <p>How to Make Payment using bKash Account.</p>
+            <p class="b">If you have a bKash account then follow the steps below</p>
+            <ul>
+                <li>Click on pay with bKash</li>
+                <li>Enter Your bkash Account</li>
+                <li>Check your Mobile Meassage and Entry The OTP</li>
+                <li>Entry Your PIN and Confirm</li>
+            </ul>
+        </div>
+    </section>
+
+<div id="bKash_button"></div>
+
+<div id="wait" style="position: absolute; left: 40%; text-align: center; top: 50%;">Please wait...</div>
+
+<script type="text/javascript">
+
+    var payAmount = <%= amount %>;
+    var paymentId = '<%= paymentId %>';
+    var bookingId = '<%= orderBookingId %>';
+    var redirectUrl = '<%= redirectUrl %>';
+    var accessKey = '<%= accessKey %>';
+</script>
+
+<script type="text/javascript" src="../../../public/js/bkash/bkash.script.js"></script>
+</body>
+
+</html>
+

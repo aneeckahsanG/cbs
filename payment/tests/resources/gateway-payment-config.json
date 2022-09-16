@@ -1,0 +1,414 @@
+{
+  "1": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "gatewayId": "1",
+      "configs": {
+        "name": "first"
+      },
+      "createdBy": "test"
+    },
+    "response": [
+      {
+        "id": "1",
+        "name": "first"
+      }
+    ]
+  },
+  "2": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "gatewayId": "1",
+      "configs": {
+        "currency": "BDT"
+      },
+      "createdBy": "test"
+    }
+  },
+  "3": {
+    "request": {
+      "gatewayId": "3",
+      "configs": {
+        "currency": "BDT"
+      },
+      "createdBy": "test"
+    }
+  },
+  "4": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "gatewayId": "1",
+      "configs": {
+        "name": "dummy"
+      },
+      "updatedBy": "test"
+    },
+    "response": [
+      {
+        "id": "1",
+        "name": "dummy"
+      }
+    ]
+  },
+  "5": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "gatewayId": "1",
+      "configs": {
+        "name": "dummy"
+      },
+      "updatedBy": "test"
+    }
+  },
+  "6": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "gatewayId": "1",
+      "configs": {
+        "currency": "BDT"
+      },
+      "updatedBy": "test"
+    }
+  },
+  "7": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "3",
+      "gatewayId": "1",
+      "configs": {
+        "name": "dummy"
+      },
+      "updatedBy": "test"
+    }
+  },
+  "8": {
+    "db": [
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "gatewayId": "4",
+      "configs": {
+        "name": "dummy"
+      },
+      "updatedBy": "test"
+    }
+  },
+  "9": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          },
+          {
+            "id": "2",
+            "name": "second"
+          },
+          {
+            "id": "3",
+            "name": "third"
+          },
+          {
+            "id": "4",
+            "name": "forth"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "id": "2",
+        "name": "second"
+      }
+    ]
+  },
+  "10": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "dummy",
+            "prettyName": "dummy Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+                ],
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "Test",
+        "data": [
+          {
+            "id": "1",
+            "name": "first"
+          },
+          {
+            "id": "2",
+            "name": "second"
+          },
+          {
+            "id": "3",
+            "name": "third"
+          },
+          {
+            "id": "4",
+            "name": "forth"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "id": "3",
+        "name": "third"
+      }
+    ]
+  }
+
+
+
+}

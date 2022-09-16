@@ -1,0 +1,1364 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Payment",
+        "version": "1.0.0",
+        "description": "# How to use\n1. Register Payment-Gateway [__POST /gateway__] \n   * Gateway plugin need to be implemented first. Otherwise this will return error.\n2. Register Payment-Gateway specific configuration [__POST /gateway/payment-transaction-config__]\n   * Not all gateways implement this route.\n3. Map a merchant with a gateway [__POST /merchant-gateway__]\n4. Request payment transaction [__POST /payment-transaction__]\n\n# General Response format\nEvery API will return JSON object with following properties\n* status - \n__An Integer value represents HTTP status code.__\n* code - \n__An unique integer value__\n* title - \n__A human readable text summarizes the response__\n* details - \n__A human readable text elaborates the response__\n* timestamp - \n__An Integer value denoting Server's response timestamp in Epoch-Seconds.__\n* data - \n__An optional Array structure containing additional data__\n\n### Example\n```json\n{\n  \"status\": 200,\n  \"code\": 0,\n  \"title\": \"Success\",\n  \"details\": \"Success\",\n  \"timestamp\": 1552233104,\n  \"data\": [\n        {\n          \"transactionType\": \"payment\",\n          \"merchantTransactionId\": \"1234567802\",\n          \"accountId\": \"Dummy\",\n          \"amount\": \"30.00\",\n          \"currency\": \"BDT\",\n          \"gatewayParams\": {\n            \"bKashRedirectUrl\": \"http://localhost/merchant\"\n          },\n          \"merchantCallbackUrl\": \"http://merchant\",\n          \"gatewayId\": \"4\",\n          \"merchantId\": \"1\",\n          \"channel\": \"test\",\n          \"transactionId\": \"fbdb3fdf-dc97-4663-a455-75f3f8087d97\",\n          \"gatewayTransactionId\": \"bf749346-2c81-4935-8bfe-a8dd420d82ba\",\n          \"processedAmount\": \"30.00\",\n          \"processedCurrency\": \"BDT\",\n          \"paymentStatus\": \"INITIATED\",\n          \"redirectUrl\": \"http://localhost\",\n          \"createdBy\": \"test\",\n          \"createdAt\": \"2020-10-07T10:53:47.076Z\"\n        }\n   ]\n}\n```\n\n# Result Codes\n* 0 - __Success__\n* 1 - __Invalid Payment-Gateway Id__\n* 2 - __Invalid Merchant-Gateway-Id__\n* 3 - __Duplicate Gateway name__\n* 4 - __Gateway update failed__\n* 5 - __Invalid Gateway name__\n* 6 - __Invalid Gateway properties__\n* 7 - __Operation is not supported__\n* 8 - __Payment Gateway-Id required__\n* 9 - __Gateway rejects Payment-Config__\n* 10 - __Together Merchant-Id & Gateway-Id need to be unique__\n* 11 - __Merchant Gateway update failed__\n* 12 - __Invalid Merchant or Gateway-Id__\n* 13 - __Transaction-Type is not supported__\n* 14 - __Malformed or insufficient Payment Information__\n* 15 - __Payment-Transaction update failed__\n* 16 - __Invalid Payment-Transaction__\n* 17 - __Booking-ID Already Exists__\n* 18 - __Payment Tempered__\n* 253 - __Bad Request [`Input constraints failed`]__\n* 254 - __Bad request [`Invalid JSON, Invalid path etc.`]__\n* 255 - __Internal Server Error__"
+    },
+    "paths": {
+        "/gateway": {
+            "get": {
+                "tags": [
+                    "Gateway"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Gateway Id",
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": false
+                    },
+                    {
+                        "name": "name",
+                        "description": "Gateway name",
+                        "schema": {
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Gateway"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success\n"
+                    }
+                },
+                "summary": "Fetch Getway(s)"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GatewayUpdateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Gateway"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gateway"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update Gateway"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GatewayCreateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Gateway"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Gateway"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Create Gateway"
+            }
+        },
+        "/gateway/payment-transaction-config": {
+            "get": {
+                "tags": [
+                    "Gateway-Payment-Config"
+                ],
+                "parameters": [
+                    {
+                        "name": "gatewayId",
+                        "description": "Gateway-Id",
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GatewayPaymentConfig"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch Gateway-Payment-Transaction-Config(s)",
+                "description": "If you want to filter with any other config params then add them after gatewayId."
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GatewayPaymentConfigUpdateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Gateway-Payment-Config"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GatewayPaymentConfig"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update Gateway-Payment-Transaction-Config"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GatewayPaymentConfigCreateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Gateway-Payment-Config"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GatewayPaymentConfig"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Create Gateway-Payment-Transaction-Config"
+            }
+        },
+        "/merchant-gateway": {
+            "get": {
+                "tags": [
+                    "Merchant-Gateway"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Merchant-Gateway Id",
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "merchantId",
+                        "description": "Merchant-Id",
+                        "schema": {
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MerchantGateway"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch Merchant-Gateway(s)"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantGatewayUpdateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Merchant-Gateway"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantGateway"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Update Merchant-Gateway"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantGatewayCreateSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Merchant-Gateway"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantGateway"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Create Merchant-Gateway"
+            }
+        },
+        "/payment-transaction": {
+            "get": {
+                "tags": [
+                    "Payment-Transaction"
+                ],
+                "parameters": [
+                    {
+                        "name": "merchantId",
+                        "schema": {
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "transactionId",
+                        "description": "Payment service generated unique reference id",
+                        "schema": {
+                            "maxLength": 36,
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "merchantTransactionId",
+                        "description": "Merchant provided transaction id",
+                        "schema": {
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "gatewayTransactionId",
+                        "description": "Payment gateway generated transaction id",
+                        "schema": {
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "startDate",
+                        "description": "Lower limit on __createdAt__",
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "endDate",
+                        "description": "Upper limit on __createdAt__",
+                        "schema": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "offset",
+                        "description": "Current record index",
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    },
+                    {
+                        "name": "limit",
+                        "description": "Total record size",
+                        "schema": {
+                            "minimum": 1,
+                            "type": "integer"
+                        },
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaymentTransaction"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Fetch Payment-Transaction"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PaymentTransactionRequestSchema"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Payment-Transaction"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PaymentTransaction"
+                                }
+                            }
+                        },
+                        "description": "For __bKash__ and __codero__ the response are as following.\n\n{\n    \"status\": 200,\n    \"code\": 0,\n    \"title\": \"Success\",\n    \"details\": \"Success\",\n    \"timestamp\": 16157993678,\n    \"data\": [\n        {\n            \"redirectUrl\": \"http://localhost:8081/api/codero/909b5b718a3c2fd1eee7472295f7215671532712d27871ea162c8f8f625c0242cc7c422d\",\n            \"paymentId\": \"014de79e-7f7c-49d4-81c3-d99eda0c7ea7\",\n            \"processedAmount\": \"30.00\",\n            \"processedCurrency\": \"BDT\",\n            \"paymentStatus\": \"INITIATED\"\n        }\n    ]\n}\n\nHere in the data array, you will find an object. In that object you will find a key named __redirectUrl__. You have to load that url in your browser to connect with the desired gateway"
+                    }
+                },
+                "summary": "Create Payment-Transaction",
+                "description": "* To accomodate future transaction-types, some fields have been marked as optional. But for most the cases, following optional fields will be required -\n  * merchantTransactionId\n  * accountId\n  * amount\n  * currency\n\n* Additional properties may be added sometimes but they will be transient. These fields will not be save at Payment service end.\n  * ghoori\n    1. redirectUrl - Customer should be redirected to this url"
+            }
+        },
+        "/<Merchant-Provided-Callback-Url>": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MerchantPaymentTransactionCallbackRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Merchant-Callback-Url"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MerchantCallbackResponse"
+                                }
+                            }
+                        },
+                        "description": "Success"
+                    }
+                },
+                "summary": "Merchant callback request"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GatewayUpdateSchema": {
+                "description": "Root Type for GatewayUpdateSchema",
+                "required": [
+                    "id",
+                    "updatedBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int64",
+                        "description": "Gateway Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "prettyName": {
+                        "description": "Pretty name for viewing purpose as __name__ field has some restricted characters",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "A human readable text",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "* 0 - Inactive\n* 1 - Active",
+                        "type": "integer"
+                    },
+                    "baseUrl": {
+                        "description": "Gateway Base-Url. Ex - http://localhost:3000",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/AdditionalProperties",
+                        "description": "",
+                        "maxLength": 255
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of identification",
+                        "maxLength": 255,
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 1,
+                    "prettyName": "Dummy Gateway",
+                    "baseUrl": "https://localhost",
+                    "status": 1,
+                    "additionalProperties": {
+                        "key": "value"
+                    },
+                    "updatedBy": "test"
+                }
+            },
+            "GatewayPaymentConfigUpdateSchema": {
+                "description": "Root Type for GatewayPaymentConfigCreateSchema",
+                "required": [
+                    "configs",
+                    "gatewayId",
+                    "updatedBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "gatewayId": {
+                        "format": "int64",
+                        "description": "Gateway Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "id": {
+                        "format": "int64",
+                        "description": "Payment Transaction Config Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "configs": {
+                        "$ref": "#/components/schemas/Configs",
+                        "description": "",
+                        "maxLength": 255
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of identification who updates this record",
+                        "maxLength": 255,
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "gatewayId": 1,
+                    "id": 1,
+                    "configs": {
+                        "name": "test"
+                    },
+                    "updatedBy": "test"
+                }
+            },
+            "GatewayPaymentConfig": {
+                "description": "Fields in a Payment-Config is highly depended on Gateway.\n\n| Gateway name | Configs      |\n|--------------|--------------|\n| dummy        | * id         |\n|              | * name       |",
+                "example": {
+                    "id": "1",
+                    "name": "first"
+                }
+            },
+            "MerchantGatewayCreateSchema": {
+                "description": "Root Type for MerchantGatewayCreateSchema",
+                "required": [
+                    "merchantId",
+                    "gatewayId",
+                    "createdBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "merchantId": {
+                        "description": "Merchant-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "format": "int64",
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "callbackUrl": {
+                        "description": "Merchant Callback-Url. If no callbackUrl is given at __POST /payment-transaction__, then this url will be used.\n\nThis field is required if the gateway is __bKash__ or __codero__. After the completion of payment(either success/fail), payment service redirect to this url with paymentId,status and msg as query parameters.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "description": "Any kind of identification who creates this record",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "description": "This field contains additional information about the integration of merchant with the desired gateway. This field is mandatory if we integrate merchant with the following gateway.\n* bKash\n* codero\n\nFor __bKash__ additionalProperties contains the following attribute\n* __app_key__: 5nej5keguopj928ekcj3dne8p(Beta)\n* __password__: test%#de23@msdao(Beta)\n* __username__: testdemo(Beta)\n* __app_secret__:1honf6u1c56mqcivtc9ffl960slp4v2756jle5925nbooa46ch62(Beta)\n\nFor __codero__ additionalProperties contains the following attribute\n* __store_id__: epw(Beta)\n* __signature_key__: dc0c2802bf04d2ab3336ec21491146a3(Beta)"
+                    }
+                },
+                "example": {
+                    "merchantId": "1",
+                    "gatewayId": 1,
+                    "callbackUrl": "http://localhost",
+                    "createdBy": "test",
+                    "additionalProperties": {
+                        "app_key": "5nej5keguopj928ekcj3dne8p",
+                        "password": "test%#de23@msdao",
+                        "username": "testdemo",
+                        "app_secret": "1honf6u1c56mqcivtc9ffl960slp4v2756jle5925nbooa46ch62"
+                    }
+                }
+            },
+            "MerchantGatewayUpdateSchema": {
+                "description": "Root Type for MerchantGatewayCreateSchema",
+                "required": [
+                    "id",
+                    "updatedBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int64",
+                        "description": "Merchant-Gateway Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "merchantId": {
+                        "description": "Merchant-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "format": "int64",
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "* 0 - Inactive\n* 1 - Active",
+                        "type": "integer"
+                    },
+                    "callbackUrl": {
+                        "description": "Merchant Callback-Url. If no callbackUrl is given at __POST /payment-transaction__, then this url will be used.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of identification who updates this record",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "description": ""
+                    }
+                },
+                "example": {
+                    "id": "1",
+                    "merchantId": "2",
+                    "gatewayId": 4,
+                    "status": 0,
+                    "callbackUrl": "http://localhost",
+                    "updatedBy": "test",
+                    "additionalProperties": {
+                        "store_id": "xyz"
+                    }
+                }
+            },
+            "MerchantGateway": {
+                "description": "Root Type for MerchantGateway",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int64",
+                        "description": "System generated unique id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "merchantId": {
+                        "description": "Merchant Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "format": "int64",
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "status": {
+                        "description": "* 0 - Inactive\n* 1 - Active",
+                        "type": "integer"
+                    },
+                    "callbackUrl": {
+                        "description": "Merchant Callback-Url",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "createdBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "description": "Creation date",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "description": "Last udpate time",
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "description": ""
+                    }
+                },
+                "example": {
+                    "id": "1",
+                    "merchantId": "1",
+                    "gatewayId": "1",
+                    "status": 1,
+                    "callbackUrl": "http://localhost",
+                    "createdBy": "test",
+                    "createdAt": "2020-10-04T14:06:46.000Z",
+                    "updatedAt": "2020-10-04T14:06:46.000Z",
+                    "additionalProperties": {
+                        "store_id": "xyz"
+                    }
+                }
+            },
+            "PaymentTransactionRequestSchema": {
+                "title": "Root Type for PaymentTransactionRequestSchema",
+                "description": "",
+                "required": [
+                    "transactionType",
+                    "gatewayId",
+                    "merchantId",
+                    "channel",
+                    "requestedBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "transactionType": {
+                        "description": "* payment\n* refund",
+                        "enum": [
+                            "payment",
+                            "refund"
+                        ],
+                        "type": "string"
+                    },
+                    "transactionId": {
+                        "description": "Payment service generated unique reference id",
+                        "maxLength": 36,
+                        "type": "string"
+                    },
+                    "merchantTransactionId": {
+                        "description": "Merchant provided Transaction Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "description": "Customer account-id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "Payment amount",
+                        "type": "number"
+                    },
+                    "currency": {
+                        "description": "Payment currency. Ex - `BDT`, `USD` etc",
+                        "maxLength": 32,
+                        "type": "string"
+                    },
+                    "merchantCallbackUrl": {
+                        "description": "Merchant Callback-Url. If not provided, then configured callbackUrl at __GET /merchant-gateway__ end will be used.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "merchantId": {
+                        "description": "Merchant-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "channel": {
+                        "description": "Payment channel. Ex - `api`, `web`, `android`, `ios`",
+                        "type": "string"
+                    },
+                    "requestedBy": {
+                        "description": "Any kind of user identification",
+                        "type": "string"
+                    },
+                    "gatewayParams": {
+                        "$ref": "#/components/schemas/GatewayParams",
+                        "description": ""
+                    },
+                    "orderBookingId": {
+                        "description": "Merchant generated unique order/booking ID. This is mandatory for __bKash__. To call bKash gateway, we need to pass this booking ID.  ",
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "description": "This filed is required if the gateway is codero. The following information must be passed as an object in this field.\n\nFor __codero__\n\n* cus_name: \"Tamjid\"\n* cus_email: \"tamjid91@gmail.com\"\n* cus_phone: \"01722678335\"\n* desc: \"Carnival payment\""
+                    }
+                },
+                "example": {
+                    "transactionType": "payment",
+                    "merchantTransactionId": "1234567802",
+                    "accountId": "Dummy",
+                    "amount": "30.00",
+                    "currency": "BDT",
+                    "gatewayParams": {
+                        "bKashRedirectUrl": "http://localhost/merchant"
+                    },
+                    "merchantCallbackUrl": "http://merchant",
+                    "gatewayId": "4",
+                    "merchantId": "1",
+                    "channel": "test",
+                    "requestedBy": "test",
+                    "orderBookingId": "TFG45",
+                    "additionalProperties": {
+                        "cus_name": "Tamjid",
+                        "cus_email": "tamjid91@gmail.com",
+                        "cus_phone": "01722678335",
+                        "desc": "Carnival payment"
+                    }
+                }
+            },
+            "PaymentTransaction": {
+                "title": "Root Type for PaymentTransaction",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "transactionType": {
+                        "description": "Payment-Transaction type:\n* payment\n* refund",
+                        "enum": [
+                            "payment",
+                            "refund"
+                        ],
+                        "type": "string"
+                    },
+                    "transactionId": {
+                        "description": "System generated reference id",
+                        "maxLength": 36,
+                        "type": "string"
+                    },
+                    "merchantTransactionId": {
+                        "description": "Merchant provided Transaction-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayTransactionId": {
+                        "description": "Gateway generated transaction id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "description": "Customer Account-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "Payment amount",
+                        "type": "number"
+                    },
+                    "currency": {
+                        "description": "Payment currency",
+                        "maxLength": 32,
+                        "type": "string"
+                    },
+                    "processedAmount": {
+                        "description": "Processed amount",
+                        "type": "integer"
+                    },
+                    "processedCurrency": {
+                        "description": "Processed currency",
+                        "maxLength": 36,
+                        "type": "string"
+                    },
+                    "paymentStatus": {
+                        "description": "* INITIATED\n* PENDING\n* SUCCESS\n* FAILED\n* UNKNOWN\n* CANCELLED",
+                        "enum": [
+                            "INITIATED",
+                            "PENDING",
+                            "SUCCESS",
+                            "FAILED",
+                            "UNKNOWN",
+                            "CANCELLED"
+                        ],
+                        "type": "string"
+                    },
+                    "gatewayErrorCode": {
+                        "description": "Gateway error-code",
+                        "maxLength": 32,
+                        "type": "string"
+                    },
+                    "gatewayErrorMsg": {
+                        "description": "Gateway error message",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "remarks": {
+                        "description": "Additional text explaining this transaction",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "channel": {
+                        "description": "Payment channel",
+                        "type": "string"
+                    },
+                    "merchantCallbackUrl": {
+                        "description": "Given Merchant Callback-Url.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "merchantId": {
+                        "description": "Merchant-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayParams": {
+                        "$ref": "#/components/schemas/GatewayParams",
+                        "description": ""
+                    },
+                    "createdBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "description": "Creation date",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "description": "Last udpate time",
+                        "type": "string"
+                    },
+                    "orderBookingId": {
+                        "description": "Order/Booking ID generated by merchant for specific order",
+                        "type": "string"
+                    },
+                    "referencePaymentId": {
+                        "description": "paymentId generated by specific gateway(ex bKash,codero)",
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "description": "If any additional properties are given "
+                    }
+                },
+                "example": {
+                    "transactionType": "payment",
+                    "merchantTransactionId": "1234567802",
+                    "orderBookingId": "1313ss",
+                    "referencePaymentId": "THDF4&hgdh7",
+                    "accountId": "Dummy",
+                    "amount": "30.00",
+                    "currency": "BDT",
+                    "gatewayParams": {
+                        "bKashRedirectUrl": "http://localhost/merchant"
+                    },
+                    "merchantCallbackUrl": "http://merchant",
+                    "gatewayId": "4",
+                    "merchantId": "1",
+                    "additionalProperties": {
+                        "desc": "Carnival payment",
+                        "cus_name": "Tamjid",
+                        "cus_email": "tamjid91@gmail.com",
+                        "cus_phone": "01722678335"
+                    },
+                    "channel": "test",
+                    "transactionId": "fbdb3fdf-dc97-4663-a455-75f3f8087d97",
+                    "gatewayTransactionId": "bf749346-2c81-4935-8bfe-a8dd420d82ba",
+                    "processedAmount": "30.00",
+                    "processedCurrency": "BDT",
+                    "paymentStatus": "SUCCESS",
+                    "redirectUrl": "http://localhost",
+                    "createdBy": "test",
+                    "createdAt": "2020-10-07T10:53:47.076Z"
+                }
+            },
+            "AdditionalProperties": {
+                "description": "Gateway related additional properties. Followings are the gateway agnostic properties -\n* checkIntervals - Array of integers/just integer specifying interval(in seconds) to check for Payment Status\n* maxRetry - Maximum retry to check for Payment status",
+                "type": "object",
+                "example": {
+                    "checkIntervals": [
+                        10,
+                        20,
+                        40
+                    ],
+                    "maxRetry": 5
+                }
+            },
+            "Gateway": {
+                "description": "Root Type for Gateway",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "format": "int64",
+                        "description": "System generated unique id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Gateway name.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "prettyName": {
+                        "description": "Pretty name.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "A human readable text",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "status": {
+                        "description": "* 0 -Inactive\n* 1 - Active",
+                        "type": "integer"
+                    },
+                    "baseUrl": {
+                        "description": "Gateway Base-Url.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/AdditionalProperties",
+                        "description": ""
+                    },
+                    "createdBy": {
+                        "description": "Any kind of user-identification",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of user-identification",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "description": "Creation date",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "description": "Last udpate time",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": "4",
+                    "name": "dummy",
+                    "prettyName": "Dummy Gateway",
+                    "status": 0,
+                    "baseUrl": "https://localhost",
+                    "additionalProperties": {
+                        "key": "value"
+                    },
+                    "createdBy": "test",
+                    "updatedBy": "test",
+                    "createdAt": "2020-10-04T12:12:02.000Z",
+                    "updatedAt": "2020-10-04T12:24:50.000Z"
+                }
+            },
+            "GatewayCreateSchema": {
+                "description": "Root Type for GatewayCreateSchema",
+                "required": [
+                    "name",
+                    "prettyName",
+                    "baseUrl",
+                    "createdBy"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Gateway name. \nNote that,\n* There should be a plugin installed with this name at Payment service end",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "prettyName": {
+                        "description": "Pretty name for viewing purpose as __name__ field has some restricted characters",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "A human readable text",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "baseUrl": {
+                        "description": "Gateway Base-Url. Ex - http://localhost:3000",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "additionalProperties": {
+                        "$ref": "#/components/schemas/AdditionalProperties",
+                        "description": ""
+                    },
+                    "createdBy": {
+                        "description": "Any kind of identification who creates this record",
+                        "maxLength": 255,
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "dummy",
+                    "prettyName": "Dummy Gateway",
+                    "baseUrl": "https://localhost",
+                    "additionalProperties": {
+                        "checkIntervals": [
+                            10,
+                            20,
+                            40
+                        ]
+                    },
+                    "createdBy": "test"
+                }
+            },
+            "Configs": {
+                "description": "Payment Config's fields for a gateway.\n\n| Gateway name | Configs |\n|--------------|---------|\n| dummy        | * name  |",
+                "type": "object",
+                "example": {
+                    "name": "sample"
+                }
+            },
+            "GatewayPaymentConfigCreateSchema": {
+                "description": "Fields in a Payment-Config Create request is highly depended on Gateway.\n\nFor example, if __dummy__ gateway is being used, then it will expect the following properties - \n* name",
+                "required": [
+                    "createdBy",
+                    "configs",
+                    "gatewayId"
+                ],
+                "type": "object",
+                "properties": {
+                    "gatewayId": {
+                        "format": "int64",
+                        "description": "Gateway Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "configs": {
+                        "$ref": "#/components/schemas/Configs",
+                        "description": ""
+                    },
+                    "createdBy": {
+                        "description": "Any kind of identification who creates this record",
+                        "maxLength": 255,
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "gatewayId": 1,
+                    "configs": {
+                        "name": "sample"
+                    },
+                    "createdBy": "test"
+                }
+            },
+            "GatewayParams": {
+                "description": "Gateway related additional data object.\n\n* ghoori\n  1. bKashRedirectUrl - Merchant hosted payment page at where the customer will be redirected\n     ```json\n     {\n       \"bKashRedirectUrl\":\"http://localhost/merchant\"\n     }\n     ```",
+                "type": "object",
+                "example": {
+                    "data": "data"
+                }
+            },
+            "MerchantCallbackResponse": {
+                "title": "Root Type for MerchantCallbackResponse",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "format": "int32",
+                        "description": "Result code from Merchant end. __status = `200`__ will be treated as success. ",
+                        "type": "integer"
+                    },
+                    "resend": {
+                        "description": "Boolean flag to denote if Payment service should resend callback request or not. Note that, If status = 200, then this field value will be ignored.\n* false - Do not resend\n* true - Resend",
+                        "type": "boolean"
+                    }
+                },
+                "example": {
+                    "status": 200,
+                    "resend": false
+                }
+            },
+            "MerchantPaymentTransactionCallbackRequest": {
+                "title": "Root Type for PaymentTransaction",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "transactionType": {
+                        "description": "Payment-Transaction type:\n* payment\n* refund",
+                        "enum": [
+                            "payment",
+                            "refund"
+                        ],
+                        "type": "string"
+                    },
+                    "transactionId": {
+                        "description": "System generated reference id",
+                        "maxLength": 36,
+                        "type": "string"
+                    },
+                    "merchantTransactionId": {
+                        "description": "Merchant provided Transaction-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayTransactionId": {
+                        "description": "Gateway generated transaction id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "description": "Customer Account-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "amount": {
+                        "description": "Payment amount",
+                        "type": "number"
+                    },
+                    "currency": {
+                        "description": "Payment currency",
+                        "maxLength": 32,
+                        "type": "string"
+                    },
+                    "processedAmount": {
+                        "description": "Processed amount",
+                        "type": "integer"
+                    },
+                    "processedCurrency": {
+                        "description": "Processed currency",
+                        "maxLength": 36,
+                        "type": "string"
+                    },
+                    "paymentStatus": {
+                        "description": "* SUCCESS\n* FAILED",
+                        "enum": [
+                            "SUCCESS",
+                            "FAILED"
+                        ],
+                        "type": "string"
+                    },
+                    "gatewayErrorCode": {
+                        "description": "Gateway error-code",
+                        "maxLength": 32,
+                        "type": "string"
+                    },
+                    "gatewayErrorMsg": {
+                        "description": "Gateway error message",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "remarks": {
+                        "description": "Additional text explaining this transaction",
+                        "maxLength": 1024,
+                        "type": "string"
+                    },
+                    "channel": {
+                        "description": "Payment channel",
+                        "type": "string"
+                    },
+                    "merchantCallbackUrl": {
+                        "description": "Given Merchant Callback-Url.",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayId": {
+                        "description": "Gateway-Id",
+                        "minimum": 1,
+                        "type": "integer"
+                    },
+                    "merchantId": {
+                        "description": "Merchant-Id",
+                        "maxLength": 255,
+                        "type": "string"
+                    },
+                    "gatewayParams": {
+                        "$ref": "#/components/schemas/GatewayParams",
+                        "description": ""
+                    },
+                    "createdBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "description": "Any kind of user-identification",
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "description": "Creation date",
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "description": "Last udpate time",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "transactionType": "payment",
+                    "merchantTransactionId": "1234567802",
+                    "accountId": "Dummy",
+                    "amount": "30.00",
+                    "currency": "BDT",
+                    "gatewayParams": {
+                        "bKashRedirectUrl": "http://localhost/merchant"
+                    },
+                    "merchantCallbackUrl": "http://merchant",
+                    "gatewayId": "4",
+                    "merchantId": "1",
+                    "channel": "test",
+                    "transactionId": "fbdb3fdf-dc97-4663-a455-75f3f8087d97",
+                    "gatewayTransactionId": "bf749346-2c81-4935-8bfe-a8dd420d82ba",
+                    "processedAmount": "30.00",
+                    "processedCurrency": "BDT",
+                    "paymentStatus": "INITIATED",
+                    "redirectUrl": "http://localhost",
+                    "createdBy": "test",
+                    "createdAt": "2020-10-07T10:53:47.076Z"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Gateway-Payment-Config",
+            "description": ""
+        },
+        {
+            "name": "Gateway",
+            "description": ""
+        },
+        {
+            "name": "Merchant-Gateway",
+            "description": ""
+        },
+        {
+            "name": "Payment-Transaction",
+            "description": ""
+        },
+        {
+            "name": "Merchant-Callback-Url",
+            "description": ""
+        }
+    ]
+}

@@ -1,0 +1,542 @@
+{
+  "1": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "merchantId": "1",
+      "gatewayId": 1,
+      "callbackUrl": "http://example.com/next",
+      "createdBy": "test"
+    },
+    "response": [
+      {
+        "id": "1",
+        "merchantId": "1",
+        "gatewayId": "1",
+        "status": 1,
+        "callbackUrl": "http://example.com/next",
+        "createdBy": "test",
+        "updatedBy": null
+      }
+    ]
+  },
+  "2": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "merchantId": "1",
+      "gatewayId": 1,
+      "createdBy": "test"
+    },
+    "response": [
+      {
+        "id": "1",
+        "merchantId": "1",
+        "gatewayId": "1",
+        "status": 1,
+        "callbackUrl": null,
+        "createdBy": "test",
+        "updatedBy": null
+      }
+    ]
+  },
+  "3": {
+    "request": {
+      "merchantId": "1",
+      "gatewayId": 2,
+      "callbackUrl": "http://example.com/next",
+      "createdBy": "test"
+    }
+  },
+  "4": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 0,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "merchantId": "1",
+      "gatewayId": 1,
+      "createdBy": "test"
+    }
+  },
+  "5": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "callbackUrl": "http://example.com/next",
+      "updatedBy": "admin"
+    },
+    "response": [
+      {
+        "id": "1",
+        "merchantId": "1",
+        "gatewayId": "1",
+        "status": 1,
+        "callbackUrl": "http://example.com/next",
+        "createdBy": "test",
+        "updatedBy": "admin"
+      }
+    ]
+  },
+  "6": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "status": 0,
+      "updatedBy": "admin"
+    },
+    "response": [
+      {
+        "id": "1",
+        "merchantId": "1",
+        "gatewayId": "1",
+        "status": 0,
+        "callbackUrl": "http://example.com/next",
+        "createdBy": "test",
+        "updatedBy": "admin"
+      }
+    ]
+  },
+  "7": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 0,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "status": 1,
+      "updatedBy": "admin"
+    },
+    "response": [
+      {
+        "id": "1",
+        "merchantId": "1",
+        "gatewayId": "1",
+        "status": 1,
+        "callbackUrl": "http://example.com/next",
+        "createdBy": "test",
+        "updatedBy": "admin"
+      }
+    ]
+  },
+  "8": {
+    "db": [
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "gatewayId": 5,
+      "updatedBy": "admin"
+    }
+  },
+  "9": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 0,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "4",
+            "status": 1,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "1",
+      "gatewayId": "1",
+      "updatedBy": "admin"
+    }
+  },
+  "10": {
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "test",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+              },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "2",
+            "merchantId": "1",
+            "gatewayId": "2",
+            "status": 1,
+            "callbackUrl": "http://example.com/next",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "id": "2",
+      "gatewayId": "1",
+      "updatedBy": "admin"
+    }
+  },
+  "11": {
+    "db": [
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": "http://example.com/one",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "2",
+            "merchantId": "2",
+            "gatewayId": "2",
+            "status": 1,
+            "callbackUrl": "http://example.com/two",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "3",
+            "merchantId": "3",
+            "gatewayId": "3",
+            "status": 1,
+            "callbackUrl": "http://example.com/three",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "id": "2",
+        "merchantId": "2",
+        "gatewayId": "2",
+        "status": 1,
+        "callbackUrl": "http://example.com/two",
+        "createdBy": "test",
+        "updatedBy": null
+      }
+    ]
+  },
+  "12": {
+    "db": [
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": "http://example.com/one",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "2",
+            "merchantId": "2",
+            "gatewayId": "2",
+            "status": 1,
+            "callbackUrl": "http://example.com/two",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "3",
+            "merchantId": "3",
+            "gatewayId": "3",
+            "status": 1,
+            "callbackUrl": "http://example.com/three",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "4",
+            "merchantId": "2",
+            "gatewayId": "4",
+            "status": 1,
+            "callbackUrl": "http://example.com/four",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "id": "2",
+        "merchantId": "2",
+        "gatewayId": "2",
+        "status": 1,
+        "callbackUrl": "http://example.com/two",
+        "createdBy": "test",
+        "updatedBy": null
+      },
+      {
+        "id": "4",
+        "merchantId": "2",
+        "gatewayId": "4",
+        "status": 1,
+        "callbackUrl": "http://example.com/four",
+        "createdBy": "test",
+        "updatedBy": null
+      }
+    ]
+  }
+
+
+}

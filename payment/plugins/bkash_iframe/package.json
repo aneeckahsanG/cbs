@@ -1,0 +1,14 @@
+{
+  "name": "plugin-bkash-iframe",
+  "version": "0.0.0",
+  "description": "Integrate bKash iframe gateway",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tamjid Morsalin",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  }
+}

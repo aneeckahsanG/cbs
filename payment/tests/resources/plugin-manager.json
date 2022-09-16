@@ -1,0 +1,206 @@
+{
+  "1": {
+    "plugin": {
+      "name": "plugin_test_1",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_1",
+            "description": "This is a gateway",
+            "status": 1,
+            "prettyName": "Test Payment Gateway",
+            "baseUrl": "http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+              ],
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "2",
+            "name": "non_existing_plugin",
+            "description": "This is a gateway",
+            "status": 1,
+            "prettyName": "Test Payment Gateway",
+            "baseUrl": "http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+              ],
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          },
+          {
+            "id": "3",
+            "name": "plugin_test_2",
+            "description": "This is a gateway",
+            "status": 0,
+            "prettyName": "Test Payment Gateway",
+            "baseUrl": "http://localhost:3000",
+            "additionalProperties": {
+              "checkIntervals": [
+                10,
+                20,
+                40
+              ],
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ]
+  },
+  "2": {
+    "plugin": {
+      "name": "plugin_test_2",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "request": {
+      "id": "1",
+      "name": "plugin_test_2",
+      "description": "This is a gateway",
+      "status": 1,
+      "prettyName": "test Payment Gateway",
+      "baseUrl": "http://localhost:3000",
+      "additionalProperties": {
+        "checkIntervals": [
+          10, 20, 40
+        ],
+        "maxRetry": 5
+      },
+      "createdBy": "test",
+      "updatedBy": null,
+      "createdAt": "2020-12-21 00:00:00",
+      "updatedAt": "2020-12-21 00:00:00"
+    }
+  },
+  "3": {
+    "request": {
+      "id": "1",
+      "name": "non_existing_plugin",
+      "description": "This is a gateway",
+      "status": 1,
+      "prettyName": "test Payment Gateway",
+      "baseUrl": "http://localhost:3000",
+      "additionalProperties": {
+        "checkIntervals": [
+          10, 20, 40
+        ],
+        "maxRetry": 5
+      },
+      "createdBy": "test",
+      "updatedBy": null,
+      "createdAt": "2020-12-21 00:00:00",
+      "updatedAt": "2020-12-21 00:00:00"
+    }
+  },
+  "4": {
+    "plugin": {
+      "name": "plugin_test_3",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => {",
+        "  if (!context['plugin_test_3'].additionalProperties) throw new ReferenceError('additionalProperties required');",
+        "  if (!['checkIntervals','maxRetry'].every((field) => context['plugin_test_3'].additionalProperties[field] !== undefined)) {",
+        "    throw new ReferenceError('Some attributes of additionalProperties are missing');",
+        "  }",
+        "  return {};",
+        "};"
+      ]
+    },
+    "request": {
+      "id": "1",
+      "name": "plugin_test_3",
+      "description": "This is a gateway",
+      "status": 1,
+      "prettyName": "test Payment Gateway",
+      "baseUrl": "http://localhost:3000",
+      "createdBy": "test",
+      "updatedBy": null,
+      "createdAt": "2020-12-21 00:00:00",
+      "updatedAt": "2020-12-21 00:00:00"
+    }
+  },
+  "5": {
+    "plugin": {
+      "name": "plugin_test_4",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "request": {
+      "id": "1",
+      "name": "plugin_test_4",
+      "description": "This is a gateway",
+      "status": 0,
+      "prettyName": "test Payment Gateway",
+      "baseUrl": "http://localhost:3000",
+      "additionalProperties": {
+        "checkIntervals": [
+          10, 20, 40
+        ],
+        "maxRetry": 5
+      },
+      "createdBy": "test",
+      "updatedBy": null,
+      "createdAt": "2020-12-21 00:00:00",
+      "updatedAt": "2020-12-21 00:00:00"
+    }
+  },
+  "6": {
+    "plugin": {
+      "name": "plugin_test_5",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "request": {
+      "id": "1",
+      "name": "plugin_test_5",
+      "description": "This is a gateway",
+      "status": 1,
+      "prettyName": "test Payment Gateway",
+      "baseUrl": "http://localhost:3000",
+      "additionalProperties": {
+        "checkIntervals": [
+          10, 20, 40
+        ],
+        "maxRetry": 5
+      },
+      "createdBy": "test",
+      "updatedBy": null,
+      "createdAt": "2020-12-21 00:00:00",
+      "updatedAt": "2020-12-21 00:00:00"
+    }
+  }
+}

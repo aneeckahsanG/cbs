@@ -1,0 +1,3089 @@
+{
+  "1": {
+    "plugin": {
+      "name": "plugin_test_1",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_1'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_1",
+            "prettyName": "Test Payment Gateway 1",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "2": {
+    "plugin": {
+      "name": "plugin_test_2",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_2'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_2",
+            "prettyName": "Test Payment Gateway 2",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "merchantTransactionId": "1234567802",
+      "accountId": "test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "accountId": "test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "3": {
+    "db": [
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "3",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "4": {
+    "plugin": {
+      "name": "plugin_test_4",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_4",
+            "prettyName": "Test Payment Gateway 4",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "5": {
+    "plugin": {
+      "name": "plugin_test_5",
+      "contents": [
+        "'use strict';",
+        "module.exports = (context) => { return {}; }"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_5",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "authorized",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "6": {
+    "plugin": {
+      "name": "plugin_test_6",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_6'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_6",
+            "prettyName": "Test Payment Gateway 6",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "7": {
+    "plugin": {
+      "name": "plugin_test_7",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_7'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {",
+        "      if (!['bKashRedirectUrl'].every(field =>paymentInfo['gatewayParams'][field] !== undefined)) {",
+        "        throw new ReferenceError('[gatewayParams.bKashRedirectUrl] required');",
+        "      }",
+        "     },",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_7",
+            "prettyName": "Test Payment Gateway 7",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bKashRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayParams": {
+          "bKashRedirectUrl": "http://localhost/merchant"
+        },
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "8": {
+    "plugin": {
+      "name": "plugin_test_8",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_8'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {",
+        "      if (!['bKashRedirectUrl'].every(field =>paymentInfo['gatewayParams'][field] !== undefined)) {",
+        "        throw new ReferenceError('[gatewayParams.bKashRedirectUrl] required');",
+        "      }",
+        "     },",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_8",
+            "prettyName": "Test Payment Gateway 8",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "currency": "BDT"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "9": {
+    "plugin": {
+      "name": "plugin_test_9",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_9'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_9",
+            "prettyName": "Test Payment Gateway 9",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "10": {
+    "plugin": {
+      "name": "plugin_test_10",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_10'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'refund': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'refundCheck': async (paymentInfo) => {",
+        "       if (!paymentInfo.merchantTransactionId) {",
+        "         throw new ReferenceError('merchantTransactionId is required');",
+        "       }",
+        "     },",
+        "    'refundMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_10",
+            "prettyName": "Test Payment Gateway 10",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "refund",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "11": {
+    "plugin": {
+      "name": "plugin_test_11",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_11'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'refund': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'refundCheck': async (paymentInfo) => {},",
+        "    'refundMerge': async (paymentRequest, prevPaymentTransaction) => {",
+        "       paymentRequest.accountId = prevPaymentTransaction.accountId;",
+        "       paymentRequest.amount = prevPaymentTransaction.amount;",
+        "       paymentRequest.currency = prevPaymentTransaction.currency;",
+        "       paymentRequest.processedAmount = prevPaymentTransaction.processedAmount;",
+        "       paymentRequest.processedCurrency = prevPaymentTransaction.processedCurrency;",
+        "     },",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_11",
+            "prettyName": "Test Payment Gateway 11",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "refund",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567801",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "refund",
+        "merchantTransactionId": "1234567801",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "12": {
+    "plugin": {
+      "name": "plugin_test_12",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_12'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'refund': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'refundCheck': async (paymentInfo) => {},",
+        "    'refundMerge': async (paymentRequest, prevPaymentTransaction) => {",
+        "       if (prevPaymentTransaction.amount > 50) {",
+        "         throw ReferenceError('can not refund amount more than 50');",
+        "       }",
+        "    }",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_12",
+            "prettyName": "Test Payment Gateway 12",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "80.00",
+            "currency": "BDT",
+            "processedAmount": "80.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "refund",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567801",
+      "accountId": "test",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "13": {
+    "plugin": {
+      "name": "plugin_test_13",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_13'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'refund': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'refundCheck': async (paymentInfo) => {},",
+        "    'refundMerge': async (paymentRequest, prevPaymentTransaction) => {",
+        "       paymentRequest.remarks='successfully refunded';",
+        "    }",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_13",
+            "prettyName": "Test Payment Gateway 13",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "refund",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567801",
+      "accountId": "test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "refund",
+        "merchantTransactionId": "1234567801",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "remarks": "successfully refunded",
+        "paymentStatus": "SUCCESS",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "14": {
+    "plugin": {
+      "name": "plugin_test_14",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_14'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'refund': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'refundCheck': async (paymentInfo) => {},",
+        "    'refundMerge': async (paymentRequest, prevPaymentTransaction) => {",
+        "       if (!prevPaymentTransaction) {",
+        "         throw ReferenceError('no previous Payment-Transaction found');",
+        "       }",
+        "    }",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_14",
+            "prettyName": "Test Payment Gateway 14",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "refund",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567801",
+      "accountId": "test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    }
+  },
+  "15": {
+    "plugin": {
+      "name": "plugin_test_15",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_15'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.FAILED",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_15",
+            "prettyName": "Test Payment Gateway 15",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 5
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "FAILED",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "16": {
+    "plugin": {
+      "name": "plugin_test_16",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_16'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.CREATE,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.PENDING",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_16",
+            "prettyName": "test Payment Gateway",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 4,
+              "checkIntervals": [
+                5,
+                3
+              ]
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "transactionType": "payment",
+        "merchantTransactionId": "1234567802",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "accountId": "Test",
+        "amount": "30.00",
+        "currency": "BDT",
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "1",
+        "channel": "api",
+        "paymentStatus": "PENDING",
+        "createdBy": "test"
+      }
+    ]
+  },
+  "17": {
+    "plugin": {
+      "name": "plugin_test_17",
+      "contents": [
+        "'use strict'; ",
+        "const op = {VOID: 0,CREATE: 1};",
+        "const status = {INITIATED: 'INITIATED',PENDING: 'PENDING',SUCCESS: 'SUCCESS',FAILED: 'FAILED',UNKNOWN: 'UNKNOWN'};",
+        "module.exports = (context) => {",
+        "  let tryCounter = 0;",
+        "  const gateway = context['plugin_test_17'];",
+        "  const db = context['db'];",
+        "  return {",
+        "    'payment': async (request) => {",
+        "       return {",
+        "         op: op.VOID,",
+        "         response: {",
+        "          gatewayTransactionId: require('uuid').v4(),",
+        "          processedAmount: request.amount,",
+        "          processedCurrency: request.currency,",
+        "          paymentStatus: status.SUCCESS",
+        "         }",
+        "      }",
+        "    },",
+        "    'paymentCheck': async (paymentInfo) => {},",
+        "    'paymentMerge': async (paymentRequest, prevPaymentTransaction) => {},",
+        "  };",
+        "}"
+      ]
+    },
+    "db": [
+      {
+        "modelName": "Gateway",
+        "data": [
+          {
+            "id": "1",
+            "name": "plugin_test_17",
+            "prettyName": "Test Payment Gateway 17",
+            "description": "This is a gateway",
+            "status": 1,
+            "baseUrl": " http://localhost:3000",
+            "additionalProperties": {
+              "maxRetry": 4,
+              "checkIntervals": [
+                5,
+                3
+              ]
+            },
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      },
+      {
+        "modelName": "MerchantGateway",
+        "data": [
+          {
+            "id": "1",
+            "merchantId": "1",
+            "gatewayId": "1",
+            "status": 1,
+            "callbackUrl": " http://localhost:3000",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-12-21 00:00:00",
+            "updatedAt": "2020-12-21 00:00:00"
+          }
+        ]
+      }
+    ],
+    "request": {
+      "transactionType": "payment",
+      "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+      "merchantTransactionId": "1234567802",
+      "accountId": "Test",
+      "amount": "30.00",
+      "currency": "BDT",
+      "gatewayParams": {
+        "bankRedirectUrl": "http://localhost/merchant"
+      },
+      "merchantCallbackUrl": "http://merchant.com",
+      "gatewayId": "1",
+      "merchantId": "1",
+      "channel": "api",
+      "requestedBy": "test"
+    },
+    "response": [
+      {
+        "processedAmount": "30.00",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS"
+      }
+    ]
+  },
+  "18": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "3",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+        "merchantTransactionId": "1234567804",
+        "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "4",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "19": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "3",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "20": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "3",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "4",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "21": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "1",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "3",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "4",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "22": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2018-01-02 00:00:00",
+            "updatedAt": "2018-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-01-02 00:00:00",
+            "updatedAt": "2020-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2019-01-02 00:00:00",
+            "updatedAt": "2019-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+        "merchantTransactionId": "1234567803",
+        "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "3",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2020-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "23": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2018-01-02 00:00:00",
+            "updatedAt": "2018-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2019-01-02 00:00:00",
+            "updatedAt": "2019-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-01-02 00:00:00",
+            "updatedAt": "2020-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "merchantTransactionId": "1234567801",
+        "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2018-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+        "merchantTransactionId": "1234567803",
+        "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "3",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2019-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "24": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2019-01-02 00:00:00",
+            "updatedAt": "2019-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2020-01-02 00:00:00",
+            "updatedAt": "2020-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2018-01-02 00:00:00",
+            "updatedAt": "2018-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "merchantTransactionId": "1234567801",
+        "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2019-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+        "merchantTransactionId": "1234567803",
+        "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "3",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2020-01-01T18:00:00.000Z"
+      }
+    ]
+  },
+  "25": {
+    "db": [
+      {
+        "modelName": "PaymentTransaction",
+        "data": [
+          {
+            "id": "1",
+            "transactionType": "payment",
+            "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+            "merchantTransactionId": "1234567801",
+            "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+            "accountId": "test",
+            "amount": "10.00",
+            "currency": "BDT",
+            "processedAmount": "10.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "1",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "2",
+            "transactionType": "payment",
+            "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+            "merchantTransactionId": "1234567802",
+            "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+            "accountId": "test",
+            "amount": "20.00",
+            "currency": "BDT",
+            "processedAmount": "20.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "2",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "3",
+            "transactionType": "payment",
+            "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+            "merchantTransactionId": "1234567803",
+            "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+            "accountId": "test",
+            "amount": "30.00",
+            "currency": "BDT",
+            "processedAmount": "30.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "3",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "4",
+            "transactionType": "payment",
+            "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+            "merchantTransactionId": "1234567804",
+            "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+            "accountId": "test",
+            "amount": "40.00",
+            "currency": "BDT",
+            "processedAmount": "40.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "4",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "5",
+            "transactionType": "payment",
+            "transactionId": "37301b88-0f82-49f2-a5e7-7b747aa72ae2",
+            "merchantTransactionId": "1234567805",
+            "gatewayTransactionId": "60f4848b-362f-48b2-82e4-4460a4380f53",
+            "accountId": "test",
+            "amount": "50.00",
+            "currency": "BDT",
+            "processedAmount": "50.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "5",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "6",
+            "transactionType": "payment",
+            "transactionId": "75c918f2-347d-4183-ae01-414d149b01a5",
+            "merchantTransactionId": "1234567806",
+            "gatewayTransactionId": "1dddfaf7-794d-4c82-8322-8a124b643436",
+            "accountId": "test",
+            "amount": "60.00",
+            "currency": "BDT",
+            "processedAmount": "60.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "6",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          },
+          {
+            "id": "7",
+            "transactionType": "payment",
+            "transactionId": "e7c89ee6-a990-41d5-b1da-9f30a169b083",
+            "merchantTransactionId": "1234567807",
+            "gatewayTransactionId": "69edd188-1684-4e39-9ba6-523671cd1e6e",
+            "accountId": "test",
+            "amount": "70.00",
+            "currency": "BDT",
+            "processedAmount": "70.00",
+            "processedCurrency": "BDT",
+            "paymentStatus": "SUCCESS",
+            "gatewayErrorCode": null,
+            "gatewayErrorMsg": null,
+            "remarks": null,
+            "gatewayParams": {
+              "bankRedirectUrl": "http://localhost/merchant"
+            },
+            "merchantCallbackUrl": "http://merchant.com",
+            "gatewayId": "7",
+            "merchantId": "2",
+            "channel": "api",
+            "createdBy": "test",
+            "updatedBy": null,
+            "createdAt": "2021-01-02 00:00:00",
+            "updatedAt": "2021-01-02 00:00:00"
+          }
+        ]
+      }
+    ],
+    "response": [
+      {
+        "transactionType": "payment",
+        "transactionId": "da7688bb-0c42-4e3a-a120-856adb0ebf3e",
+        "merchantTransactionId": "1234567801",
+        "gatewayTransactionId": "aedfa75c-0310-46cc-9908-8e789f2a8466",
+        "accountId": "test",
+        "amount": "10.000000",
+        "currency": "BDT",
+        "processedAmount": "10.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "1",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "42821296-0039-4d0b-9884-2a56e772c22a",
+        "merchantTransactionId": "1234567802",
+        "gatewayTransactionId": "ab377471-eefc-4d0d-9cde-4f4485b296a2",
+        "accountId": "test",
+        "amount": "20.000000",
+        "currency": "BDT",
+        "processedAmount": "20.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "2",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "739f2674-ae5c-4355-a985-1f79ce18c706",
+        "merchantTransactionId": "1234567803",
+        "gatewayTransactionId": "5efb3829-f96e-4a53-bbf7-39efa4dd7556",
+        "accountId": "test",
+        "amount": "30.000000",
+        "currency": "BDT",
+        "processedAmount": "30.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "3",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "13e37141-1688-46c8-a317-e30490e92b47",
+        "merchantTransactionId": "1234567804",
+        "gatewayTransactionId": "0025b4a4-004c-44d6-b694-42b4c29aa26e",
+        "accountId": "test",
+        "amount": "40.000000",
+        "currency": "BDT",
+        "processedAmount": "40.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "4",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "37301b88-0f82-49f2-a5e7-7b747aa72ae2",
+        "merchantTransactionId": "1234567805",
+        "gatewayTransactionId": "60f4848b-362f-48b2-82e4-4460a4380f53",
+        "accountId": "test",
+        "amount": "50.000000",
+        "currency": "BDT",
+        "processedAmount": "50.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "5",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "75c918f2-347d-4183-ae01-414d149b01a5",
+        "merchantTransactionId": "1234567806",
+        "gatewayTransactionId": "1dddfaf7-794d-4c82-8322-8a124b643436",
+        "accountId": "test",
+        "amount": "60.000000",
+        "currency": "BDT",
+        "processedAmount": "60.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "6",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      },
+      {
+        "transactionType": "payment",
+        "transactionId": "e7c89ee6-a990-41d5-b1da-9f30a169b083",
+        "merchantTransactionId": "1234567807",
+        "gatewayTransactionId": "69edd188-1684-4e39-9ba6-523671cd1e6e",
+        "accountId": "test",
+        "amount": "70.000000",
+        "currency": "BDT",
+        "processedAmount": "70.000000",
+        "processedCurrency": "BDT",
+        "paymentStatus": "SUCCESS",
+        "gatewayErrorCode": null,
+        "gatewayErrorMsg": null,
+        "remarks": null,
+        "channel": "api",
+        "merchantCallbackUrl": "http://merchant.com",
+        "gatewayId": "7",
+        "merchantId": "2",
+        "gatewayParams": {
+          "bankRedirectUrl": "http://localhost/merchant"
+        },
+        "createdBy": "test",
+        "updatedBy": null,
+        "createdAt": "2021-01-01T18:00:00.000Z"
+      }
+    ]
+  }
+}

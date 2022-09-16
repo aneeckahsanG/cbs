@@ -1,0 +1,182 @@
+* {
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #E2136E;
+    color: #fff;
+}
+
+.header {
+    background: #fff;
+    width: 100%;
+}
+
+.header img {
+    height: 70px;
+}
+
+.header a {
+    color: #111111;
+    letter-spacing: 0.25px;
+    display: inline-block;
+}
+
+.header a:first-child::after {
+    content: '|';
+    color: #111;
+    display: inline-block;
+    margin: 0 1px 0 5px;
+}
+
+.header .container {
+    align-items: center;
+}
+
+.container,
+.bkash {
+    width: 900px;
+    margin: 0 auto;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bkash {
+    padding: 50px 0;
+}
+
+.bkash-pay {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.bkash-pay h4 {
+    font-size: 18px;
+    font-weight: 400;
+    border-bottom: 1px solid;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+.bkash-pay h2 {
+    font-size: 34px;
+    font-weight: 400;
+    margin: 0 0 45px;
+}
+
+.bkash-pay a {
+    background: #BD1D5C;
+    padding: 12px 30px;
+    border-radius: 2px;
+    letter-spacing: 0.25px;
+    color: #fff;
+    transition: all 0.3s linear;
+}
+
+.bkash-pay a:hover {
+    background: #fff;
+    color: #BD1D5C;
+}
+
+.bkash-step {
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+
+.bkash-step p {
+    letter-spacing: 0.25px;
+    margin-bottom: 30px;
+}
+
+.b {
+    font-weight: 500;
+}
+
+.bkash-step ul {
+    padding: 0;
+    margin: 0;
+}
+
+.bkash-step ul li {
+    display: block;
+    border-radius: 30px;
+    background: #C50258;
+    margin: 15px 0;
+    counter-increment: listNumber;
+    letter-spacing: 0.25px;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    padding: 5px;
+}
+
+.bkash-step ul li::before {
+    content: counter(listNumber);
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 24px;
+    color: #111;
+    background: #fff;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    margin-right: 10px;
+    line-height: 40px;
+}
+
+@media all and (max-width:767px) {
+    .container,
+    .bkash {
+        width: 100%;
+    }
+    .header {
+        padding: 0px 15px;
+    }
+    .header img {
+        height: 34px;
+    }
+    .header p {
+        margin: 0;
+    }
+    .bkash {
+        display: block;
+        padding: 15px;
+    }
+    .bkash-pay,
+    .bkash-step {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .bkash-pay h2 {
+        margin: 0 0 15px;
+    }
+    .bkash-pay a {
+        margin-bottom: 20px;
+        display: inline-block;
+    }
+    .bkash-step ul li {
+        padding: 5px 5px 5px 40px;
+        position: relative;
+    }
+    .bkash-step ul li::before {
+        font-size: 18px;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        position: absolute;
+        left: 7px;
+        top: 19%;
+    }
+}
