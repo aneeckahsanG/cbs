@@ -48,25 +48,6 @@ module.exports = async () => {
     require('./routes/payment-transaction')(paymentTransactionController)
   );
 
-  app.use('/api/bkash',
-    await require('./plugins/bkash_iframe/routes')({db: db, cache:cache})
-  );
-
-  app.use('/api/codero',
-    await require('./plugins/codero/routes')({db: db})
-  );
-
-  app.use('/api/nagad',
-      await require('./plugins/nagad/routes')({db: db, cache:cache})
-  );
-  app.use('/api/portwallet',
-      await require('./plugins/portwallet/routes')({db: db, cache:cache})
-  );
-  app.use('/api/shurjopay',
-      await require('./plugins/shurjopay/routes')({db: db})
-  );
-
-
   if (process.env.NODE_ENV === 'development') {
     app.use('/test', require('./routes/test')());
   }
